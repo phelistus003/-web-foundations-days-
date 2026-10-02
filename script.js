@@ -5,11 +5,13 @@ let notes = [
     { id: 4, text: "Revise JavaScript arrays", category: "study" },
     { id: 5, text: "Call mum", category: "personal" },
 ];
+
 function searchNotes(word) {
     return notes.filter(note =>
         note.text.toLowerCase().includes(word.toLowerCase())
     );
 }
+
 function longestNote() {
     if (notes.length === 0) {
         return null;
@@ -25,33 +27,43 @@ function longestNote() {
 
     return longest;
 }
-function longestNote() {
-    if (notes.length === 0) {
-        return null;
-    }
 
-    let longest = notes[0];
+function countByCategory() {
+    let counts = {
+        personal: 0,
+        work: 0,
+        study: 0
+    };
 
     for (let note of notes) {
-        if (note.text.length > longest.text.length) {
-            longest = note;
-        }
+        counts[note.category]++;
     }
 
-    return longest;
+    return counts;
 }
+
 function getSummary() {
     let counts = countByCategory();
 
-    return `${notes.length} notes: ${counts.personal} personal, ${counts.work} work, ${counts.study} study.`;
+    let noteWord = notes.length === 1 ? "note" : "notes";
+
+    return `${notes.length} ${noteWord}: ${counts.personal} personal, ${counts.work} work, ${counts.study} study.`;
 }
+
 function isDuplicate(text) {
-    let normalizedText = text.trim().replace(/\s+/g, " ").toLowerCase();
+    let normalizedText = text
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
 
     return notes.some(note =>
-        note.text.trim().replace(/\s+/g, " ").toLowerCase() === normalizedText
+        note.text
+            .trim()
+            .replace(/\s+/g, " ")
+            .toLowerCase() === normalizedText
     );
 }
+
 function addNote(text, category) {
     if (text.trim().length < 1 || text.trim().length > 200) {
         console.log("Note must be between 1 and 200 characters.");
@@ -79,30 +91,22 @@ function addNote(text, category) {
     console.log("Note added successfully.");
     return true;
 }
-function addNote(text, category) {
-    if (text.trim().length < 1 || text.trim().length > 200) {
-        console.log("Note must be between 1 and 200 characters.");
-        return false;
-    }
+console.log("Search existing word:", searchNotes("JavaScript"));
 
-    if (isDuplicate(text)) {
-        console.log("Note already exists.");
-        return false;
-    }
+console.log("Search missing word:", searchNotes("football"));
 
-    if (!["personal", "work", "study"].includes(category)) {
-        console.log("Invalid category.");
-        return false;
-    }
+console.log("Longest note:", longestNote());
 
-    let newNote = {
-        id: notes.length + 1,
-        text: text.trim(),
-        category: category
-    };
+console.log("Category counts:", countByCategory());
 
-    notes.push(newNote);
+console.log("Summary:", getSummary());
 
-    console.log("Note added successfully.");
-    return true;
-}
+console.log("Duplicate:", isDuplicate("  CALL   MUM  "));
+
+console.log("Add valid note:", addNote("Buy vegetables", "personal"));
+
+console.log("Add duplicate:", addNote("  Buy   vegetables ", "personal"));
+
+console.log("Add invalid category:", addNote("Study CSS", "random"));
+
+console.log("Add empty note:", addNote("", "study"));
