@@ -1,0 +1,134 @@
+/* Light theme: every colour lives in a variable */
+:root {
+    --bg: #f4f4f4;
+    --text: #333;
+    --header-bg: #333;
+    --header-text: white;
+    --card-bg: white;
+    --card-alt-bg: #f9f9f9;
+    --input-bg: white;
+    --border: #ccc;
+    --border-light: #ddd;
+}
+
+/* Dark theme: only redefines the variables */
+body.dark {
+    --bg: #121212;
+    --text: #eeeeee;
+    --header-bg: #000000;
+    --header-text: #ffffff;
+    --card-bg: #1e1e1e;
+    --card-alt-bg: #2a2a2a;
+    --input-bg: #2a2a2a;
+    --border: #555555;
+    --border-light: #444444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--bg);
+    color: var(--text);
+}
+header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    text-align: center;
+    padding: 30px 20px;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+nav a {
+    color: var(--header-text);
+    text-decoration: none;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+main {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+section {
+    background-color: var(--card-bg);
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    list-style: none;
+}
+.features li {
+    background-color: var(--card-alt-bg);
+    padding: 20px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid var(--border);
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text);
+}
+button:hover {
+    opacity: 0.8;
+}
+
+/* Classes added by script.js to the character counter */
+.warning {
+    color: orange;
+}
+.over {
+    color: red;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 20px 10px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    main {
+        padding: 0 10px;
+    }
+}
