@@ -1,0 +1,9 @@
+# Day 8 Reflection
+
+The most difficult concept in this course was understanding how to design a system that remains correct when many users perform the same action at the same time. In TicketHub, I realized that showing a seat as available is not enough because two customers could select it simultaneously. I worked through this problem by breaking it into smaller steps: temporarily holding the seat, using a database transaction and row-level lock, checking the seat's current status, and confirming the purchase only after verified payment. This helped me understand why database constraints and transactions are essential, not just optional features.
+
+Another challenging part was estimating traffic for a popular concert. I used the given figures to calculate average request rates and then considered how traffic could spike above the average. This showed me why systems need capacity planning, waiting rooms, caching, and controlled access during major sales.
+
+Based on the feedback I received, I would improve my capstone by making the connection between requirements, estimates, and architecture even clearer. I would also strengthen the design with more detailed failure scenarios and test cases, especially for expired seat holds, repeated payment notifications, and simultaneous purchase attempts.
+
+Next, I want to learn how to implement a real backend API, write SQL transactions, and test concurrent requests. I also want to practice load testing so I can compare my estimates with actual system performance. My goal is to move from describing a scalable system to building and testing one.
